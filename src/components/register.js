@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-import { Radio,Col,Panel,Button,Form,FormControl,FormGroup, ControlLabel } from 'react-bootstrap'
+import { Radio,Col,Panel,Button,Form,FormControl,FormGroup, ControlLabel ,Grid, Row, } from 'react-bootstrap'
 import autobind from 'autobind-decorator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -11,12 +11,14 @@ export const fields=[ 'firstName', 'lastName', 'occupation','martial_status','do
 @autobind
 class RegisterDonor extends Component {
     DONOR_REGISTRATION () {
-        console.log(this.props.values)
+        console.log(this.props)
         let {dispatch} =this.props
         dispatch(DONOR_REGISTRATION(this.props.values))
     }
     render () {
-        console.log(this)
+        const title=(
+            <h3 className="text-center">Donor registration</h3>
+        )
         let {
             fields: { firstName, lastName, occupation,martial_status,dob,email,phone },
             resetForm,
@@ -24,109 +26,121 @@ class RegisterDonor extends Component {
             pristine, reset
         } = this.props
         return (
-            <Form horizontal>
-                <FormGroup controlId="firstName">
-                    <Col componentClass={ControlLabel} sm={3}>
-                        First Name
-                    </Col>
-                    <Col sm={7}>
-                        <FormControl type="text" placeholder="FirstName" {...firstName} />
-                    </Col>
-                </FormGroup>
-                <FormGroup>
-                    <Col componentClass={ControlLabel} sm={3}>
-                        Last Name
-                    </Col>
-                    <Col sm={7}>
-                        <FormControl type="text" placeholder="last name" {...lastName} />
-                    </Col>
-                </FormGroup>
-                <FormGroup>
-                    <Col componentClass={ControlLabel} sm={3}>
-                        Occupation
-                    </Col>
-                    <Col sm={7}>
-                        <FormControl type="text" placeholder="Occupation" {...occupation} />
-                    </Col>
-                </FormGroup>
-                <FormGroup>
-                    <Col componentClass={ControlLabel} sm={3}>
-                        Dob
-                    </Col>
-                    <Col sm={7}>
-                        <FormControl type="date" placeholder="Date of Birth" {...dob} />
-                    </Col>
-                </FormGroup>
-                    <FormGroup>
-                        <Col componentClass={ControlLabel} sm={3}>Martial Status</Col>
-                    <Radio name="radioGroup" inline {...martial_status }
-                    checked={martial_status.value === 'married'}>
-                        Married
-                    </Radio>
-                        {' '}
-                        <Radio name="radioGroup" inline>
-                        Unmarried
-                        </Radio>
-                </FormGroup>
-                <FormGroup>
-                    <br />
-                    <hr />
-                </FormGroup>
-                <div>
-                    <Panel header= 'Personal details' bsStyle="primary" className="text-center" ></Panel>
-                    <hr />
-                    <FormGroup>
-                        <Col componentClass={ControlLabel} sm={3}>
-                            Email
-                        </Col>
-                        <Col sm={7}>
-                            <FormControl type="email" placeholder="last name" {...email} />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Col componentClass={ControlLabel} sm={3}>
-                            Phone
-                        </Col>
-                        <Col sm={7}>
-                            <FormControl type="text" placeholder="Phone" {...phone} />
-                        </Col>
-                    </FormGroup>
+            <Grid>
+                <Row className="show-grid">
 
-                </div>
-                <div>
-                    <br />
-                    <hr />
-                </div>
-                <div>
-                    <Panel header= 'Emergency Contact Details' bsStyle="success" className="text-center" ></Panel>
-                    <hr />
-                    <FormGroup>
-                        <Col componentClass={ControlLabel} sm={3}>
-                            Email
-                        </Col>
-                        <Col sm={7}>
-                            <FormControl type="email" placeholder="last name" {...email} />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Col componentClass={ControlLabel} sm={3}>
-                            Phone
-                        </Col>
-                        <Col sm={7}>
-                            <FormControl type="text" placeholder="Phone" {...phone} />
-                        </Col>
-                    </FormGroup>
+                    <Panel header={title} bsStyle="success">
+                        <Form horizontal>
+                            <Col md={12}>
+                                <Col md={6}>
+                                    <FormGroup controlId="firstName">
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            First Name
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="text" placeholder="FirstName" {...firstName} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Occupation
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="text" placeholder="Occupation" {...occupation} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>Martial Status</Col>
+                                        <Radio name="radioGroup" inline {...martial_status }>
+                                            Married
+                                        </Radio>
+                                        {' '}
+                                        <Radio name="radioGroup" inline>
+                                            Unmarried
+                                        </Radio>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={6}>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Last Name
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="text" placeholder="last name" {...lastName} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Dob
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="date" placeholder="Date of Birth" {...dob} />
+                                        </Col>
+                                    </FormGroup>
+                                </Col>
+                            </Col>
+                            <FormGroup>
+                                <br />
+                                <hr />
+                            </FormGroup>
+                            <Col md={12}>
+                                    <Col md={6}>
+                                        <hr />
+                                        <Panel header= 'Personal details' bsStyle="primary" className="text-center" ></Panel>
+                                        <hr />
+                                        <FormGroup>
+                                            <Col componentClass={ControlLabel} sm={3}>
+                                                Email
+                                            </Col>
+                                            <Col sm={7}>
+                                                <FormControl type="email" placeholder="last name" {...email} />
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Col componentClass={ControlLabel} sm={3}>
+                                                Phone
+                                            </Col>
+                                            <Col sm={7}>
+                                                <FormControl type="text" placeholder="Phone" {...phone} />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
 
-                </div>
-                <br />
-                <FormGroup>
-                    <Col smOffset={2} sm={6}>
-                        <Button disabled={pristine || submitting} onClick={ () =>  this.DONOR_REGISTRATION()}>
-                            Submit
-                        </Button>
-                    </Col>
-                </FormGroup>
-            </Form>
+                                <Col md={6}>
+                                    <hr />
+                                    <Panel header= 'Emergency Contact Details' bsStyle="danger" className="text-center" ></Panel>
+                                    <hr />
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Email
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="email" placeholder="last name" {...email} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Phone
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="text" placeholder="Phone" {...phone} />
+                                        </Col>
+                                    </FormGroup>
+
+                                </Col>
+                            </Col>
+                            <br />
+                            <FormGroup>
+                                <Col md={6}>
+                                    <Button disabled={pristine || submitting} onClick={ () =>  this.DONOR_REGISTRATION()}>
+                                        Submit
+                                    </Button>
+                                </Col>
+                            </FormGroup>
+                        </Form>
+                    </Panel>
+                </Row>
+            </Grid>
         )
     }
 }
