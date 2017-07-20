@@ -8,7 +8,7 @@ import configureStore from './components/store'
 import {  sampleData } from  './actions/registerDonor'
 import { App } from './components/App';
 import { browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import{ syncHistoryWithStore } from 'react-router-redux'
 import  allReducers  from './reducers/reducers'
 import './style.less';
 const store= configureStore()

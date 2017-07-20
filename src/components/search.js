@@ -3,6 +3,7 @@ import {reduxForm} from "redux-form";
 import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Grid, Panel, Row} from "react-bootstrap";
 import autobind from "autobind-decorator";
 import {SEARCH_DONOR} from "../actions/actions";
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 export const fields=[ 'bloodGroup', 'city']
 @autobind
 class SearchDonors extends Component {
@@ -11,19 +12,47 @@ class SearchDonors extends Component {
         let { dispatch } = this.props
         dispatch(SEARCH_DONOR())
     }
-
     handleSearch () {
-        let {bloodGroup , city, dispatch } = this.props
-        dispatch ()
+
     }
     render() {
         const title= "Search Donors"
         let {
             fields: { bloodGroup, city},
+            searchResults,
             resetForm,
             submitting,
             pristine, reset
         } = this.props
+        console.log("searchResults")
+        console.log(searchResults)
+        console.log("searchResults")
+        const options = {
+            page: 2,  // which page you want to show as default
+            sizePerPageList: [ {
+                text: '5', value: 5
+            }, {
+                text: '10', value: 10
+            }, {
+                text: 'All', value: searchResults.length
+            } ], // you can change the dropdown list for size per page
+            sizePerPage: 5,  // which size per page you want to locate as default
+            pageStartIndex: 0, // where to start counting the pages
+            paginationSize: 3,  // the pagination bar size.
+            prePage: 'Prev', // Previous page button text
+            nextPage: 'Next', // Next page button text
+            firstPage: 'First', // First page button text
+            lastPage: 'Last', // Last page button text
+            paginationPosition: 'top'  // default is bottom, top and both is all available
+            // hideSizePerPage: true > You can hide the dropdown for sizePerPage
+            // alwaysShowAllBtns: true // Always show next and previous button
+            // withFirstAndLast: false > Hide the going to First and Last page button
+        };
+        const selectRow = {
+            mode: 'checkbox',  // multi select
+            clickToSelect: true
+        };
+
         return (
             <div>
                 <Grid>
@@ -58,7 +87,16 @@ class SearchDonors extends Component {
                 </Grid>
                 <br />
                 <hr />
-                <h1>hkhjkdhskfhdksk</h1>
+                <Grid>
+                    <Row className="show-grid">
+                        <Col md={12}>
+                            <BootstrapTable data={ searchResults }  pagination={ true } options={ options }  selectRow={ selectRow } bordered={ false }>
+                                <TableHeaderColumn dataField='firstName' isKey={true} >First Name</TableHeaderColumn>
+                                <TableHeaderColumn dataField='lastName'>LastName</TableHeaderColumn>
+                            </BootstrapTable>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
 
 
@@ -79,6 +117,7 @@ function getInitFields() {
     }
 }
 function selectProps (state) {
+    console.log()
     return {
         searchResults: state.allReducers.donors
     }

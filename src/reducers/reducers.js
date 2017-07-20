@@ -5,9 +5,9 @@ import { handleActions } from 'redux-actions'
 import {reducer as formReducer} from 'redux-form'
 
 const addDonor = (action) =>{
-    return {
-        data :action.payload
-    }
+    return action.payload
+    
+    
 }
 const donors =handleActions({
     DONOR_REGISTRATION: (state = [], action) => {

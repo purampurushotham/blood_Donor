@@ -55,11 +55,11 @@ class RegisterDonor extends Component {
                                     </FormGroup>
                                     <FormGroup>
                                         <Col componentClass={ControlLabel} sm={3}>Martial Status</Col>
-                                        <Radio name="radioGroup" inline {...martial_status }>
+                                        <Radio name="radioGroup" inline value='Married' {...martial_status}>
                                             Married
                                         </Radio>
                                         {' '}
-                                        <Radio name="radioGroup" inline>
+                                        <Radio name="radioGroup" inline value='UnMarried' {...martial_status}>
                                             Unmarried
                                         </Radio>
                                     </FormGroup>
