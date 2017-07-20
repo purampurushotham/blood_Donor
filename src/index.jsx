@@ -11,7 +11,7 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import  allReducers  from './reducers/reducers'
 import './style.less';
-const store= createStore (allReducers)
+const store= configureStore()
 let appRender = () =>{
     const history = syncHistoryWithStore(browserHistory, store);
     render(

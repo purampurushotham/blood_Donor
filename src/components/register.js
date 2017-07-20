@@ -10,6 +10,10 @@ export const fields=[ 'firstName', 'lastName', 'occupation','martial_status','do
 
 @autobind
 class RegisterDonor extends Component {
+
+    componentWillMount() {
+
+    }
     DONOR_REGISTRATION () {
         console.log(this.props)
         let {dispatch} =this.props
@@ -84,27 +88,27 @@ class RegisterDonor extends Component {
                                 <hr />
                             </FormGroup>
                             <Col md={12}>
-                                    <Col md={6}>
-                                        <hr />
-                                        <Panel header= 'Personal details' bsStyle="primary" className="text-center" ></Panel>
-                                        <hr />
-                                        <FormGroup>
-                                            <Col componentClass={ControlLabel} sm={3}>
-                                                Email
-                                            </Col>
-                                            <Col sm={7}>
-                                                <FormControl type="email" placeholder="last name" {...email} />
-                                            </Col>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Col componentClass={ControlLabel} sm={3}>
-                                                Phone
-                                            </Col>
-                                            <Col sm={7}>
-                                                <FormControl type="text" placeholder="Phone" {...phone} />
-                                            </Col>
-                                        </FormGroup>
-                                    </Col>
+                                <Col md={6}>
+                                    <hr />
+                                    <Panel header= 'Personal details' bsStyle="primary" className="text-center" ></Panel>
+                                    <hr />
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Email
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="email" placeholder="last name" {...email} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Phone
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="text" placeholder="Phone" {...phone} />
+                                        </Col>
+                                    </FormGroup>
+                                </Col>
 
                                 <Col md={6}>
                                     <hr />
@@ -132,7 +136,7 @@ class RegisterDonor extends Component {
                             <br />
                             <FormGroup>
                                 <Col md={6}>
-                                    <Button disabled={pristine || submitting} onClick={ () =>  this.DONOR_REGISTRATION()}>
+                                    <Button onClick={ () =>  this.DONOR_REGISTRATION()}>
                                         Submit
                                     </Button>
                                 </Col>
@@ -144,26 +148,18 @@ class RegisterDonor extends Component {
         )
     }
 }
-
-RegisterDonor.propTypes = {
-    fields: PropTypes.object.isRequired,
-    resetForm: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired
-}
-function getInitFields() {
-    let initValues = {
-        firstName : 'puram',
-        lastName : 'purushotham',
-        email: 'puram.purushotham@india.semanticbits.com',
+RegisterDonor.defaultProps ={
+    fields : {
+        firstName:'purushotham',
+        lastName: 'puram',
+        email: 'puram@gmai.com',
         dob: '08/12/1993',
-        occupation:'employee',
-        phone:'89744565841',
-        martial_status:'UnMarried'
+        phone:'89778865984',
+        occupation:'emplyee',
+        martial_status:'unMarried'
     }
-    return initValues;
 }
 export default reduxForm({
     form: 'RegisterDonor',
-    fields,
-    initialValues : getInitFields
+    fields
 })(RegisterDonor)
