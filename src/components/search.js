@@ -2,18 +2,24 @@ import React, {Component, PropTypes} from "react";
 import {reduxForm} from "redux-form";
 import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Grid, Panel, Row} from "react-bootstrap";
 import autobind from "autobind-decorator";
-import {SEARCH_DONOR} from "../actions/actions";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { FIND_DONORS }  from '../actions/actions'
+import { showInfo } from '../actions/actions'
 export const fields=[ 'bloodGroup', 'city']
 @autobind
 class SearchDonors extends Component {
-    componentWillMount() {
-        console.log('handle')
-        let { dispatch } = this.props
-        dispatch(SEARCH_DONOR())
-    }
     handleSearch () {
+        let { dispatch} = this.props
+        dispatch(FIND_DONORS)
 
+    }
+    getSelectedRowKeys() {
+        //Here is your answer
+
+    }
+    onRowClick(row) {
+       let { dispatch } = this.props
+        dispatch(dispatch(showInfo(row)))
     }
     render() {
         const title= "Search Donors"
@@ -43,16 +49,13 @@ class SearchDonors extends Component {
             nextPage: 'Next', // Next page button text
             firstPage: 'First', // First page button text
             lastPage: 'Last', // Last page button text
-            paginationPosition: 'top'  // default is bottom, top and both is all available
+            paginationPosition: 'top', // default is bottom, top and both is all available
             // hideSizePerPage: true > You can hide the dropdown for sizePerPage
             // alwaysShowAllBtns: true // Always show next and previous button
             // withFirstAndLast: false > Hide the going to First and Last page button
-        };
-        const selectRow = {
-            mode: 'checkbox',  // multi select
-            clickToSelect: true
-        };
 
+                onRowClick: this.onRowClick.bind(this)
+        };
         return (
             <div>
                 <Grid>
@@ -79,7 +82,7 @@ class SearchDonors extends Component {
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
-                                        <Button bsStyle = "info" onClick= {() => this.handleSearch () }>Search</Button>                                </FormGroup>
+                                        <Button bsStyle = "info" onClick= {() => this.handleSearch(this) }>Search</Button>                                </FormGroup>
                                 </Col>
                             </Form>
                         </Panel>
@@ -90,9 +93,16 @@ class SearchDonors extends Component {
                 <Grid>
                     <Row className="show-grid">
                         <Col md={12}>
-                            <BootstrapTable data={ searchResults }  pagination={ true } options={ options }  selectRow={ selectRow } bordered={ false }>
-                                <TableHeaderColumn dataField='firstName' isKey={true} >First Name</TableHeaderColumn>
+                            <BootstrapTable data={ searchResults } options = {options} striped={true}  hover = {true } >
+                                <TableHeaderColumn dataField={key}  key={index} >S no</TableHeaderColumn>
+                                <TableHeaderColumn dataField='firstName'  >First Name</TableHeaderColumn>
                                 <TableHeaderColumn dataField='lastName'>LastName</TableHeaderColumn>
+                                <TableHeaderColumn dataField='dob'>Date of Birth</TableHeaderColumn>
+                                <TableHeaderColumn dataField='bloodGroup'>Blood Group</TableHeaderColumn>
+                                <TableHeaderColumn dataField='occupation'>Occupation</TableHeaderColumn>
+                                <TableHeaderColumn dataField='martial_status'>Martial Status</TableHeaderColumn>
+                                <TableHeaderColumn dataField='city'>City</TableHeaderColumn>
+                                <TableHeaderColumn dataField='phone'>Phone</TableHeaderColumn>
                             </BootstrapTable>
                         </Col>
                     </Row>
@@ -106,9 +116,7 @@ class SearchDonors extends Component {
 
 }
 SearchDonors.propTypes = {
-    dispatch: PropTypes.func.isRequired,
     searchResults: PropTypes.array
-
 }
 function getInitFields() {
     let initialValues ={
@@ -117,7 +125,9 @@ function getInitFields() {
     }
 }
 function selectProps (state) {
-    console.log()
+    console.log("select props in search")
+    console.log(state)
+    console.log("select props in search")
     return {
         searchResults: state.allReducers.donors
     }

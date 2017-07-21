@@ -24,8 +24,13 @@ const donors =handleActions({
         console.log(state)
         console.log("search")
         return state
+    },
+    FIND_DONORS : (state,action) => {
+        console.log("sgafjhdsgfjdjsgfjdsfd")
+        console.log(state)
+        console.log("sgafjhdsgfjdjsgfjdsfd")
     }
-},[])
+},[]);
 const allReducers=combineReducers({donors:donors,
     form : formReducer});
 export default allReducers

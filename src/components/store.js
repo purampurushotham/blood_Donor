@@ -5,7 +5,7 @@ import { routerReducer } from 'react-router-redux'
 import { routerMiddleware ,push } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
-
+import donorsReducer from '../reducers/reducers'
 import   allReducers   from '../reducers/reducers'
 
 export default function configureStore(initialState={}){
@@ -15,6 +15,9 @@ export default function configureStore(initialState={}){
         }
     })
 
+    console.log("initialState")
+    console.log(initialState)
+    console.log("initialState")
     const reducer = combineReducers({
         form: reduxFormReducer,
         allReducers,
@@ -29,6 +32,16 @@ export default function configureStore(initialState={}){
             window.devToolsExtension ? window.devToolsExtension() : f => f
         )
     )
+    if (module.hot) {
+        // Enable Webpack hot module replacement for reducers
+        module.hot.accept('../reducers/reducers', () => {
+            const nextRootReducer = require('../reducers/reducers').default
+            store.replaceReducer(nextRootReducer)
+        })
+    }
+    console.log("store")
+    console.log(store)
+    console.log("store")
     return store
     /*
 

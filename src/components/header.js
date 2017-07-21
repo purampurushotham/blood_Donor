@@ -4,29 +4,36 @@ import { LinkContainer } from 'react-router-bootstrap'
 import autobind from 'autobind-decorator'
 import  { SEARCH_DONOR } from '../actions/actions'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 @autobind
 class Header extends Component {
+
     constructor (props){
         super(props)
         console.log("header")
         console.log(this.props)
         console.log("header")
     }
+    handleSearchRestartClick(){
+        console.log('handleSearchEvent')
+        console.log(this)
+        this.props.dispatch(SEARCH_DONOR)
+    }
     render(){
-        let { dispatch} = this.props
+
         return (
             <div>
             <Navbar>
                 <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="#">Blood Donation </a>
-                    </Navbar.Brand>
+                        <Navbar.Brand>
+                            Blood Donation
+                        </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>
                     <LinkContainer to='/' >
                         <NavItem>Register</NavItem>
                     </LinkContainer>
-                    <LinkContainer to='/search'  >
+                    <LinkContainer to='/search' onClick={this.handleSearchRestartClick (this)} >
                         <NavItem>Search</NavItem>
                     </LinkContainer>
                 </Nav>
@@ -46,14 +53,12 @@ Header.propTypes = {
     dispatch: PropTypes.func,
     children: PropTypes.object
 }
-Header.defaultProps={
-   dispatch :  () => {}
-}
 function selectProps (state) {
     console.log("seletcProps")
     console.log(state)
     console.log("seletcProps")
     return {
+        state
     }
 }
 

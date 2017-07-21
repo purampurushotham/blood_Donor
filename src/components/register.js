@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { DONOR_REGISTRATION } from '../actions/actions'
 
-export const fields=[ 'firstName', 'lastName', 'occupation','martial_status','dob','email','phone']
+export const fields=[ 'firstName', 'lastName', 'occupation','martial_status','dob','email','phone','bloodGroup','city']
 
 @autobind
 class RegisterDonor extends Component {
@@ -24,7 +24,7 @@ class RegisterDonor extends Component {
             <h3 className="text-center">Donor registration</h3>
         )
         let {
-            fields: { firstName, lastName, occupation,martial_status,dob,email,phone },
+            fields: { firstName, lastName, occupation,martial_status,dob,p_email,e_email,p_phone,e_phone,bloodGroup, city},
             resetForm,
             submitting,
             pristine, reset
@@ -42,7 +42,7 @@ class RegisterDonor extends Component {
                                             First Name
                                         </Col>
                                         <Col sm={7}>
-                                            <FormControl type="text" placeholder="FirstName" {...firstName} />
+                                            <FormControl type="text" placeholder="First Name" {...firstName} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
@@ -51,6 +51,14 @@ class RegisterDonor extends Component {
                                         </Col>
                                         <Col sm={7}>
                                             <FormControl type="text" placeholder="Occupation" {...occupation} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            Blood Group
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="text" placeholder="Blood Group" {...bloodGroup} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
@@ -65,12 +73,12 @@ class RegisterDonor extends Component {
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
-                                    <FormGroup>
+                                    <FormGroup controlId="firstName">
                                         <Col componentClass={ControlLabel} sm={3}>
-                                            Last Name
+                                            First Name
                                         </Col>
                                         <Col sm={7}>
-                                            <FormControl type="text" placeholder="last name" {...lastName} />
+                                            <FormControl type="text" placeholder="Last Name" {...lastName} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
@@ -79,6 +87,14 @@ class RegisterDonor extends Component {
                                         </Col>
                                         <Col sm={7}>
                                             <FormControl type="date" placeholder="Date of Birth" {...dob} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Col componentClass={ControlLabel} sm={3}>
+                                            City
+                                        </Col>
+                                        <Col sm={7}>
+                                            <FormControl type="text" placeholder="City" {...city} />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -97,7 +113,7 @@ class RegisterDonor extends Component {
                                             Email
                                         </Col>
                                         <Col sm={7}>
-                                            <FormControl type="email" placeholder="last name" {...email} />
+                                            <FormControl type="email" placeholder="Email" {...p_email} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
@@ -105,7 +121,7 @@ class RegisterDonor extends Component {
                                             Phone
                                         </Col>
                                         <Col sm={7}>
-                                            <FormControl type="text" placeholder="Phone" {...phone} />
+                                            <FormControl type="text" placeholder="Phone" {...p_phone} />
                                         </Col>
                                     </FormGroup>
                                 </Col>
@@ -119,7 +135,7 @@ class RegisterDonor extends Component {
                                             Email
                                         </Col>
                                         <Col sm={7}>
-                                            <FormControl type="email" placeholder="last name" {...email} />
+                                            <FormControl type="email" placeholder="last name" {...e_email} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
@@ -127,7 +143,7 @@ class RegisterDonor extends Component {
                                             Phone
                                         </Col>
                                         <Col sm={7}>
-                                            <FormControl type="text" placeholder="Phone" {...phone} />
+                                            <FormControl type="text" placeholder="Phone" {...e_phone} />
                                         </Col>
                                     </FormGroup>
 
